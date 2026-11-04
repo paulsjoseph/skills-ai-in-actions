@@ -16,11 +16,11 @@ jobs:
 
       - name: AI Inference
         id: ai-response
-        uses: actions/ai-inference@v1
+        uses: actions/ai-inference@v3
         with:
           prompt: |
             Give me a programming joke.
-          model: gpt-4.1
+          model: claude-sonnet-4.5
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
 
