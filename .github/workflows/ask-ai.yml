@@ -3,6 +3,10 @@ name: Ask AI
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  copilot-requests: write
+
 jobs:
   ask-ai:
     runs-on: ubuntu-latest
@@ -22,7 +26,7 @@ jobs:
             Give me a programming joke.
           model: claude-sonnet-4.5
         env:
-          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Display AI Response
         env:
