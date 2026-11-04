@@ -1,4 +1,4 @@
-name: Ask AI
+name: Test Copilot
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ permissions:
   copilot-requests: write
 
 jobs:
-  ask-ai:
+  test-copilot:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,20 +18,11 @@ jobs:
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
 
-      - name: AI Inference
-        id: ai-response
-        uses: actions/ai-inference@v3
-        with:
-          prompt: |
-            Give me a programming joke.
-          model: claude-sonnet-4.5
+      - name: Show Copilot version
+        run: copilot --version
+
+      - name: Test Copilot
         env:
           GITHUB_TOKEN: ${{ github.token }}
-
-      - name: Display AI Response
-        env:
-          AI_RESPONSE: ${{ steps.ai-response.outputs.response }}
         run: |
-          echo "## 🤖 AI Response" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "$AI_RESPONSE" >> "$GITHUB_STEP_SUMMARY"
+          copilot -p "Give me a programming joke."
